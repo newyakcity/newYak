@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { searchUrl } from "../constants";
+import { MAX_POST_LENGTH, searchUrl } from "../constants";
 
 export const postService = {
     search: async (lat, lng) => {
@@ -11,9 +11,9 @@ export const postService = {
     },
     formatDate: date => moment(date).format('MMMM Do YYYY, h:mm a'),
     getShortenedBody: postBody => {
-        if(postBody.length < 20)
+        if(postBody.length < MAX_POST_LENGTH)
             return postBody;
 
-        return `${postBody.slice(0, 60)}...`;
+        return `${postBody.slice(0, MAX_POST_LENGTH)}...`;
     }
 }
