@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { locationService, postService } from './services';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {locationService, postService} from './services';
+
+import {PostItem} from './components';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ export default class App extends Component {
       const locationData = await locationService.getLocation();
 
       const {latitude, longitude} = locationData.coords;
-
+      
       const posts = await postService.search(latitude, longitude);
 
       this.setState({posts});
@@ -26,13 +28,20 @@ export default class App extends Component {
   }
 
   render() {
+    const {posts} = this.state;
+
     return (
       <View style={styles.container}>
-        {this.state.posts.map(post => {
-          <Text key={post.id}>
-            {post.title}
-          </Text>
-        })}
+        {posts.length ? 
+          <FlatList
+            data={posts}
+            renderItem={post => <PostItem key={post.item.id} post={post.item}/>}
+          /> : 
+          <Text>
+            No posts yet.
+          </Text>  
+        }
+        
       </View>
     );
   }
