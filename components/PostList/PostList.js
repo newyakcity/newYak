@@ -1,20 +1,19 @@
 import React from 'react';
 
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 
+import NoPosts from './NoPosts';
 import PostItem from './PostItem';
+import separator from './Separator';
 
-export const PostList = ({posts}) => (
+export const PostList = ({posts, onPostClick}) => (
     <View style={styles.container}>
-        {posts.length ? 
         <FlatList
             data={posts}
-            renderItem={post => <PostItem key={post.item.id} post={post.item}/>}
-        /> : 
-        <Text>
-            No posts yet.
-        </Text>  
-        }
+            renderItem={post => <PostItem key={post.item.id} post={post.item} onClick={onPostClick}/>}
+            ListEmptyComponent={<NoPosts/>}
+            ItemSeparatorComponent={separator}
+        /> 
     </View>
 )
 
@@ -24,4 +23,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     }
 });
-  

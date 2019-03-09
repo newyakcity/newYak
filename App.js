@@ -9,6 +9,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
+      activePost: null,
       posts: []
     }
   }
@@ -32,7 +33,7 @@ export default class App extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <PostList posts={posts}/>
+        <PostList posts={posts} onPostClick={() => {}}/>
       </SafeAreaView>
     );
   }

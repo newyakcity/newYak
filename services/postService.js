@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { searchUrl } from "../constants";
 
 export const postService = {
@@ -7,5 +8,12 @@ export const postService = {
         const json = await res.json();
 
         return json;
-    } 
+    },
+    formatDate: date => moment(date).format('MMMM Do YYYY, h:mm a'),
+    getShortenedBody: postBody => {
+        if(postBody.length < 20)
+            return postBody;
+
+        return `${postBody.slice(0, 60)}...`;
+    }
 }
