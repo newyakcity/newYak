@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { locationService, postService } from './services';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {locationService, postService} from './services';
+
+import {PostList} from './components';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      activePost: null,
       posts: []
     }
   }
@@ -16,7 +19,7 @@ export default class App extends Component {
       const locationData = await locationService.getLocation();
 
       const {latitude, longitude} = locationData.coords;
-
+      
       const posts = await postService.search(latitude, longitude);
 
       this.setState({posts});
@@ -26,14 +29,12 @@ export default class App extends Component {
   }
 
   render() {
+    const {posts} = this.state;
+
     return (
-      <View style={styles.container}>
-        {this.state.posts.map(post => {
-          <Text key={post.id}>
-            {post.title}
-          </Text>
-        })}
-      </View>
+      <SafeAreaView style={styles.container}>
+        <PostList posts={posts} onPostClick={() => {}}/>
+      </SafeAreaView>
     );
   }
 }
@@ -41,8 +42,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   }
 });
