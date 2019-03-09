@@ -4,6 +4,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Post} from './Post';
 import { Comments } from './Comments';
 import Separator from '../common/Separator';
+import { postService } from '../../services';
 
 export class PostContainer extends Component {
     constructor(props) {
@@ -15,18 +16,24 @@ export class PostContainer extends Component {
         }
     }
 
-    render() {
-        const {post, comments} = this.state;
+    async componentDidMount() {
+      const post = await postService.getPost(this.state.post.id);
 
-        return (
-          <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-              <Post post={post}/>
-              <Separator style={styles.separator}/>
-              <Comments comments={comments}/>
-            </View>
-          </SafeAreaView>
-        );
+      this.setState({comments: post.comments})
+    }
+
+    render() {
+      const {post, comments} = this.state;
+
+      return (
+        <SafeAreaView style={styles.container}>
+          <View style={styles.container}>
+            <Post post={post}/>
+            <Separator style={styles.separator}/>
+            <Comments comments={comments}/>
+          </View>
+        </SafeAreaView>
+      );
     }
 }
 
