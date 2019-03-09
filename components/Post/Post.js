@@ -1,9 +1,10 @@
 import React from 'react';
+import {View} from 'react-native';
 
-import {Text, View} from 'react-native';
+import {PostHeader} from './PostHeader';
 
-export const Post = ({navigation}) => (
+export const Post = ({post}) => (
     <View>
-        <Text>{navigation.getParam('id', false)}</Text>
+        <PostHeader post={post}/>
     </View>
 )

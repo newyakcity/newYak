@@ -10,7 +10,7 @@ export const PostList = ({posts, onPostClick}) => (
     <View style={styles.container}>
         <FlatList
             data={posts}
-            renderItem={post => <PostItem key={post.item.id} post={post.item} onClick={() => onPostClick(post.item.id)}/>}
+            renderItem={post => <PostItem key={post.item.id} post={post.item} onClick={onPostClick}/>}
             ListEmptyComponent={<NoPosts/>}
             ItemSeparatorComponent={separator}
         /> 

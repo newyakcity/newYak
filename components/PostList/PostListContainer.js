@@ -27,7 +27,7 @@ export class PostListContainer extends Component {
         }
     }
 
-    navigate = id => this.props.navigation.navigate('Post', {id});
+    navigate = post => this.props.navigation.navigate('Post', {post});
 
     render() {
         const {posts} = this.state;
