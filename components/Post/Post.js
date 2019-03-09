@@ -1,7 +1,9 @@
 import React from 'react';
 
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 
-export default ({post}) => (
-    <View></View>
+export const Post = ({navigation}) => (
+    <View>
+        <Text>{navigation.getParam('id', false)}</Text>
+    </View>
 )

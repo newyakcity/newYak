@@ -27,12 +27,14 @@ export class PostListContainer extends Component {
         }
     }
 
+    navigate = id => this.props.navigation.navigate('Post', {id});
+
     render() {
         const {posts} = this.state;
     
         return (
           <SafeAreaView style={styles.container}>
-            <PostList posts={posts} onPostClick={() => {}}/>
+            <PostList posts={posts} onPostClick={this.navigate}/>
           </SafeAreaView>
         );
     }
