@@ -7,44 +7,44 @@ import Separator from '../common/Separator';
 import { postService } from '../../services';
 
 export class PostContainer extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          post: props.navigation.getParam('post', null),
-          comments: []
-        }
-    }
+  constructor(props) {
+      super(props);
+  
+      this.state = {
+        post: props.navigation.getParam('post', null),
+        comments: []
+      }
+  }
 
-    async componentDidMount() {
-      const post = await postService.getPost(this.state.post.id);
+  async componentDidMount() {
+    const comments = await postService.getPostComments(this.state.post.id);
 
-      this.setState({comments: post.comments})
-    }
+    this.setState({comments})
+  }
 
-    render() {
-      const {post, comments} = this.state;
+  render() {
+    const {post, comments} = this.state;
 
-      return (
-        <SafeAreaView style={styles.container}>
-          <View style={styles.container}>
-            <Post post={post}/>
-            <Separator style={styles.separator}/>
-            <Comments comments={comments}/>
-          </View>
-        </SafeAreaView>
-      );
-    }
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          <Post post={post}/>
+          <Separator style={styles.separator}/>
+          <Comments comments={comments}/>
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor: '#F5FCFF',
-      flex: 1,
-      padding: 10
-    },
-    separator: {
-      marginTop: 10,
-      marginBottom: 10
-    }
+  container: {
+    backgroundColor: '#F5FCFF',
+    flex: 1,
+    padding: 10
+  },
+  separator: {
+    marginTop: 10,
+    marginBottom: 10
+  }
 });
