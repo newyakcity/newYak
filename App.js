@@ -1,47 +1,14 @@
-import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {locationService, postService} from './services';
+import {createStackNavigator, createAppContainer} from "react-navigation";
 
-import {PostList} from './components';
+import {PostListContainer, PostContainer} from './components';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activePost: null,
-      posts: []
-    }
-  }
-
-  async componentDidMount() {
-    try{
-      const locationData = await locationService.getLocation();
-
-      const {latitude, longitude} = locationData.coords;
-      
-      const posts = await postService.search(latitude, longitude);
-
-      this.setState({posts});
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  render() {
-    const {posts} = this.state;
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <PostList posts={posts} onPostClick={() => {}}/>
-      </SafeAreaView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: PostListContainer
+  },
+  Post: {
+    screen: PostContainer
   }
 });
+
+export default createAppContainer(AppNavigator);

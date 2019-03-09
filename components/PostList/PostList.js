@@ -4,7 +4,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 
 import NoPosts from './NoPosts';
 import PostItem from './PostItem';
-import separator from './Separator';
+import separator from '../common/Separator';
 
 export const PostList = ({posts, onPostClick}) => (
     <View style={styles.container}>

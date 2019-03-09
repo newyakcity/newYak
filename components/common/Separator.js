@@ -2,8 +2,8 @@ import React from 'react';
 
 import {StyleSheet, View} from 'react-native';
 
-export default () => (
-    <View style={styles.separator}></View>
+export default ({style: additionalStyles}) => (
+    <View style={{...styles.separator, ...additionalStyles}}></View>
 )
 
 const styles = StyleSheet.create({

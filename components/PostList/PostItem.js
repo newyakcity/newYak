@@ -4,7 +4,7 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import {postService} from '../../services';
 
 export default ({post, onClick}) => (
-    <TouchableHighlight onPress={onClick}>
+    <TouchableHighlight onPress={() => onClick(post)}>
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text>{post.title}</Text>
