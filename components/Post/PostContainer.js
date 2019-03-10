@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {Post} from './Post';
-import { Comments } from './Comments';
-import Separator from '../common/Separator';
-import { postService } from '../../services';
+import {postService} from '../../services';
 
 export class PostContainer extends Component {
   constructor(props) {
@@ -19,7 +17,7 @@ export class PostContainer extends Component {
   async componentDidMount() {
     const comments = await postService.getPostComments(this.state.post.id);
 
-    this.setState({comments})
+    this.setState({comments});
   }
 
   render() {
@@ -27,11 +25,7 @@ export class PostContainer extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-          <Post post={post}/>
-          <Separator style={styles.separator}/>
-          <Comments comments={comments}/>
-        </View>
+        <Post post={post} comments={comments}/>
       </SafeAreaView>
     );
   }
@@ -39,12 +33,12 @@ export class PostContainer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
-    flex: 1,
-    padding: 10
+      backgroundColor: '#F5FCFF',
+      flex: 1,
+      padding: 10
   },
   separator: {
-    marginTop: 10,
-    marginBottom: 10
+      marginTop: 10,
+      marginBottom: 10
   }
 });

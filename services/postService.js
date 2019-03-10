@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { MAX_POST_LENGTH, searchUrl, postUrl } from "../constants";
+import { MAX_POST_LENGTH, searchUrl, postUrl, postCommentsUrl } from "../constants";
 
 export const postService = {
     // Helper methods 
