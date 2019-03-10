@@ -9,7 +9,7 @@ export const Comments = ({comments}) => (
     <View>
         <FlatList
             data={comments}
-            renderItem={comment => <Comment key={comment.id} comment={comment}/>}
+            renderItem={comment => <Comment key={comment.item.id} comment={comment.item}/>}
             ListEmptyComponent={<NoComments/>}
             ItemSeparatorComponent={separator}
         />
