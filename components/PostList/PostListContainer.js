@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 import {PostList} from './PostList';
 import {locationService, postService} from '../../services';
+import Title from './Title';
+import CreatePostButton from './CreatePostButton';
 
 export class PostListContainer extends Component {
     constructor(props) {
@@ -12,6 +14,11 @@ export class PostListContainer extends Component {
           posts: []
         }
     }
+
+    static navigationOptions = navigation => ({
+      headerTitle: <Title/>,
+      headerRight: <CreatePostButton onClick={() => navigation.navigate('CreatePost')}/>
+    })
 
     async componentDidMount() {
         try{
