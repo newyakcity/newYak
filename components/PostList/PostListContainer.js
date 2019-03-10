@@ -15,9 +15,9 @@ export class PostListContainer extends Component {
         }
     }
 
-    static navigationOptions = navigation => ({
+    static navigationOptions = props => ({
       headerTitle: <Title/>,
-      headerRight: <CreatePostButton onClick={() => navigation.navigate('CreatePost')}/>
+      headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>
     })
 
     async componentDidMount() {

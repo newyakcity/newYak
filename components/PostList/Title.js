@@ -1,4 +1,10 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 
-export default () => <Text>NewYak</Text>
+export default () => <Text style={styles.title}>NewYak</Text>
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 20
+    }
+});
