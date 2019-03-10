@@ -20,18 +20,24 @@ export class PostListContainer extends Component {
       headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>
     })
 
-    async componentDidMount() {
-        try{
-          const locationData = await locationService.getLocation();
-          
-          const {latitude, longitude} = locationData.coords;
-          
-          const posts = await postService.search(latitude, longitude);
+    getPosts = async () => {
+      try{
+        const locationData = await locationService.getLocation();
+        
+        const {latitude, longitude} = locationData.coords;
+        
+        const posts = await postService.search(latitude, longitude);
 
-          this.setState({posts});
-        } catch(e) {
-          console.log(e);
-        }
+        this.setState({posts});
+      } catch(e) {
+        console.log(e);
+      }
+    }
+
+    componentDidMount() {
+        this.getPosts();
+
+        this.props.navigation.addListener('willFocus', this.getPosts);
     }
 
     navigate = post => this.props.navigation.navigate('Post', {post});

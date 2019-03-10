@@ -36,9 +36,5 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5FCFF',
       flex: 1,
       padding: 10
-  },
-  separator: {
-      marginTop: 10,
-      marginBottom: 10
   }
 });
