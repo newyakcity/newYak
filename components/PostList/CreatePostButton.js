@@ -3,8 +3,8 @@ import {TouchableHighlight, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default ({onClick}) => (
-    <TouchableHighlight onPress={onClick}>
-        <View style={styles.iconView}>
+    <TouchableHighlight onPress={onClick} style={styles.iconView}>
+        <View>
             <Icon name="edit" size={28} color="#007aff"></Icon>
         </View>
     </TouchableHighlight>
@@ -12,6 +12,6 @@ export default ({onClick}) => (
 
 const styles = StyleSheet.create({
     iconView: {
-        paddingRight: 15
+        marginRight: 15
     }
 })
