@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 import {PostList} from './PostList';
 import {locationService, postService} from '../../services';
+import Title from './Title';
+import CreatePostButton from './CreatePostButton';
 
 export class PostListContainer extends Component {
     constructor(props) {
@@ -13,18 +15,29 @@ export class PostListContainer extends Component {
         }
     }
 
-    async componentDidMount() {
-        try{
-          const locationData = await locationService.getLocation();
-          
-          const {latitude, longitude} = locationData.coords;
-          
-          const posts = await postService.search(latitude, longitude);
+    static navigationOptions = props => ({
+      headerTitle: <Title/>,
+      headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>
+    })
 
-          this.setState({posts});
-        } catch(e) {
-          console.log(e);
-        }
+    getPosts = async () => {
+      try{
+        const locationData = await locationService.getLocation();
+        
+        const {latitude, longitude} = locationData.coords;
+        
+        const posts = await postService.search(latitude, longitude);
+
+        this.setState({posts});
+      } catch(e) {
+        console.log(e);
+      }
+    }
+
+    componentDidMount() {
+        this.getPosts();
+
+        this.props.navigation.addListener('willFocus', this.getPosts);
     }
 
     navigate = post => this.props.navigation.navigate('Post', {post});
