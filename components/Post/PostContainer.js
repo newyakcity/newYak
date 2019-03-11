@@ -14,10 +14,22 @@ export class PostContainer extends Component {
       }
   }
 
-  async componentDidMount() {
+  addCommentClick = () => this.props.navigation.navigate('AddComment', {id: this.state.post.id})
+
+  getPostComments = async () => {
     const comments = await postService.getPostComments(this.state.post.id);
 
     this.setState({comments});
+  }
+
+  componentDidMount() {
+    this.getPostComments();
+
+    this._focusListener = this.props.navigation.addListener('willFocus', this.getPostComments);
+  }
+
+  componentWillUnmount() {
+    this._focusListener.remove();
   }
 
   render() {
@@ -25,7 +37,11 @@ export class PostContainer extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Post post={post} comments={comments}/>
+        <Post 
+          addCommentClick={this.addCommentClick}
+          comments={comments}
+          post={post}
+        />
       </SafeAreaView>
     );
   }

@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         width: 50,
     },
     button: {
-        
         justifyContent: 'center',
         textAlign: 'center'
     }
