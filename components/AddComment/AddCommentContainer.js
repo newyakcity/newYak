@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {AddComment} from './AddComment';
 import Loading from '../common/Loading';
+import IconButton from '../common/IconButton';
 
 import { postService } from '../../services';
 
-import defaultStyles from '../../styles';
+import defaultStyles, {styleConstants} from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
 
 export class AddCommentContainer extends Component {
@@ -17,11 +18,26 @@ export class AddCommentContainer extends Component {
             comment: '',
             loading: false
         }
+
+        this.props.navigation.setParams({saveButton: this.getSaveButton()})
     }
 
     static navigationOptions = props => ({
-        ...defaultNavigationOptions
-      })
+        ...defaultNavigationOptions,
+        headerRight: props.navigation.getParam('saveButton')
+    })
+
+    getSaveButton = () => (
+        <IconButton
+            onClick={this.addComment}
+            icon={{
+                name: 'save',
+                size: 28,
+                color: styleConstants.palette.white
+            }}
+            containerStyle={styles.iconView}
+        />
+    )
 
     addComment = async () => {
         this.setState({loading: true});
@@ -49,8 +65,7 @@ export class AddCommentContainer extends Component {
             <SafeAreaView style={defaultStyles.container}>
                 <Loading loading={loading}/>
                 {!loading && 
-                    <AddComment 
-                        addComment={this.addComment}
+                    <AddComment
                         onCommentChange={this.onCommentChange}
                         postAuthor={post.author_id}
                         postBody={post.body}
@@ -61,3 +76,9 @@ export class AddCommentContainer extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    iconView: {
+        marginRight: 10
+    }
+})

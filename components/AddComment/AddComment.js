@@ -21,16 +21,6 @@ export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, c
             placeholder={'Great post about stuff'}
             style={styles.multiline}
         />
-
-        <Separator style={styles.separator}/>
-
-        <View>
-            <Button 
-                onPress={addComment}
-                title='Add Comment'
-                color={styleConstants.palette.primary}
-            />
-        </View>
     </View>
 )
 

@@ -7,8 +7,9 @@ import Loading from '../common/Loading';
 
 import {locationService, postService} from '../../services';
 
-import defaultStyles from '../../styles';
+import defaultStyles, { styleConstants } from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
+import IconButton from '../common/IconButton';
 
 export class CreatePostContainer extends Component {
     constructor(props) {
@@ -19,11 +20,26 @@ export class CreatePostContainer extends Component {
             body: '',
             loading: false
         }
+
+        this.props.navigation.setParams({saveButton: this.getSaveButton()});
     }
 
     static navigationOptions = props => ({
-        ...defaultNavigationOptions
+        ...defaultNavigationOptions,
+        headerRight: props.navigation.getParam('saveButton')
     })
+
+    getSaveButton = () => (
+        <IconButton
+            onClick={this.savePost}
+            icon={{
+                name: 'save',
+                size: 28,
+                color: styleConstants.palette.white
+            }}
+            containerStyle={styles.iconView}
+        />
+    )
 
     savePost = async () => {
         this.setState({loading: true});
@@ -57,7 +73,6 @@ export class CreatePostContainer extends Component {
                     <CreatePost 
                         onPostChange={body => this.setState({body})}
                         onTitleChange={title => this.setState({title})}
-                        savePost={this.savePost}
                         post={body}
                         title={title} 
                     />
@@ -70,5 +85,8 @@ export class CreatePostContainer extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 10
+    },
+    iconView: {
+        marginRight: 15
     }
 });

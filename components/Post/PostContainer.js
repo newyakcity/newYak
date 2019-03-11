@@ -3,8 +3,9 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {Post} from './Post';
 import {postService} from '../../services';
-import defaultStyles from '../../styles';
+import defaultStyles, {styleConstants} from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
+import IconButton from '../common/IconButton';
 
 export class PostContainer extends Component {
   constructor(props) {
@@ -17,11 +18,22 @@ export class PostContainer extends Component {
   }
 
   static navigationOptions = props => ({
-    ...defaultNavigationOptions
-  })
-
-  addCommentClick = () => this.props.navigation.navigate('AddComment', {
-    post: this.props.navigation.getParam('post')
+    ...defaultNavigationOptions,
+    headerRight: (
+      <IconButton
+        onClick={() => {
+          props.navigation.navigate('AddComment', {
+            post: props.navigation.getParam('post')
+          })
+        }}
+        icon={{
+            name: 'plus',
+            size: 28,
+            color: styleConstants.palette.white
+        }}
+        containerStyle={styles.iconView}
+      />
+    )
   })
 
   getPostComments = async () => {
@@ -70,5 +82,8 @@ export class PostContainer extends Component {
 const styles = StyleSheet.create({
   container: {
       padding: 10
+  },
+  iconView: {
+    marginRight: 10
   }
 });

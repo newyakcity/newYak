@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import IconButton from '../common/IconButton';
+import { styleConstants } from '../../styles';
 
 export default ({onClick}) => (
     <IconButton
@@ -8,7 +9,7 @@ export default ({onClick}) => (
         icon={{
             name: 'edit',
             size: 28,
-            color: '#FFFFFF'
+            color: styleConstants.palette.white
         }}
         containerStyle={styles.iconView}
     />
