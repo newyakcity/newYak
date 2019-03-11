@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {Comments} from './Comments';
 import {PostHeader} from './PostHeader';
+import {AddCommentsButton} from './AddCommentsButton';
 import Separator from '../common/Separator';
 
 export const Post = ({post, comments}) => (
@@ -10,6 +11,7 @@ export const Post = ({post, comments}) => (
         <PostHeader post={post}/>
         <Separator style={styles.separator}/>
         <Comments comments={comments}/>
+        <AddCommentsButton onClick={() => {}}/>
     </View>
 )
 

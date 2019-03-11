@@ -10,7 +10,7 @@ export default ({onClick}) => (
             size: 28,
             color: '#007aff'
         }}
-        buttonStyle={styles.iconView}
+        containerStyle={styles.iconView}
     />
 )
 
