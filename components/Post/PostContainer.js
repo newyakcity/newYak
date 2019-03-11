@@ -9,15 +9,18 @@ export class PostContainer extends Component {
       super(props);
   
       this.state = {
-        post: props.navigation.getParam('post', null),
         comments: []
       }
   }
 
-  addCommentClick = () => this.props.navigation.navigate('AddComment', {id: this.state.post.id})
+  addCommentClick = () => this.props.navigation.navigate('AddComment', {
+    post: this.props.navigation.getParam('post')
+  })
 
   getPostComments = async () => {
-    const comments = await postService.getPostComments(this.state.post.id);
+    const post = this.props.navigation.getParam('post');
+
+    const comments = await postService.getPostComments(post.id);
 
     this.setState({comments});
   }
@@ -33,7 +36,8 @@ export class PostContainer extends Component {
   }
 
   render() {
-    const {post, comments} = this.state;
+    const post = this.props.navigation.getParam('post');
+    const {comments} = this.state;
 
     return (
       <SafeAreaView style={styles.container}>

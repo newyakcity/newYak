@@ -10,6 +10,7 @@ export const FETCH_CONFIG = {
 
 export const MAX_POST_LENGTH = 60;
 
+export const commentUrl = `${api}/comment`;
 export const postUrl = `${api}/post`;
 export const postCommentsUrl = id => `${api}/post/${id}/comments`;
 export const searchUrl = (lat, lng) => `${api}/posts?lat=${lat}&lng=${lng}`;
