@@ -1,11 +1,11 @@
 import React from 'react';
-import {Button, StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 
 import Separator from '../common/Separator';
-import defaultStyles, { styleConstants } from '../../styles';
+import defaultStyles from '../../styles';
 
-export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', title = ''}) => (
-    <View style={{...defaultStyles.container, ...styles.container}}>
+export const CreatePost = ({onPostChange, onTitleChange, post = '', title = ''}) => (
+    <View style={[defaultStyles.container, styles.container]}>
 
         <View style={styles.formField}>
             <TextInput
@@ -15,9 +15,9 @@ export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', ti
             />
         </View>
 
-        <Separator style={styles.separator}/>
+        <Separator/>
         
-        <View style={{...styles.formField, ...styles.multiline}}>
+        <View style={[styles.formField, styles.multiline]}>
             <TextInput
                 maxLength={1000}
                 multiline={true}
@@ -34,17 +34,13 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         fontSize: 18,
-        padding: 10,
-        paddingTop: 20
     },
     formField: {
         flexDirection: 'row',
-        paddingBottom: 10
+        padding: 10,
+        paddingBottom: 15
     },
     multiline: {
         height: '80%'
-    },
-    separator: {
-        marginBottom: 15
     }
 });

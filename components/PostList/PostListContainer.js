@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 import defaultStyles from '../../styles';
 
@@ -9,7 +9,6 @@ import Title from './Title';
 import CreatePostButton from './CreatePostButton';
 import { defaultNavigationOptions } from '../../constants';
 import Loading from '../common/Loading';
-import { throwStatement } from '@babel/types';
 
 export class PostListContainer extends Component {
     constructor(props) {
@@ -84,5 +83,3 @@ export class PostListContainer extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({});
