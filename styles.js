@@ -14,7 +14,7 @@ export const headerStyle = {
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: styleConstants.palette.secondary,
+        backgroundColor: styleConstants.palette.white,
         flex: 1,
     }
 })

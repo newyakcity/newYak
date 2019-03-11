@@ -37,7 +37,7 @@ export class AddCommentContainer extends Component {
                 <AddComment 
                     addComment={this.addComment}
                     onCommentChange={this.onCommentChange}
-                    postAuthor={post.authorId}
+                    postAuthor={post.author_id}
                     postBody={post.body}
                     comment={comment}
                 />
