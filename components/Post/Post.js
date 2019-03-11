@@ -5,9 +5,10 @@ import {Comments} from './Comments';
 import {PostHeader} from './PostHeader';
 import {AddCommentsButton} from './AddCommentsButton';
 import Separator from '../common/Separator';
+import defaultStyles from '../../styles';
 
 export const Post = ({addCommentClick, comments, post}) => (
-    <View style={styles.container}>
+    <View style={{...defaultStyles.container, ...styles.container}}>
         <PostHeader post={post}/>
         <Separator style={styles.separator}/>
         <Comments comments={comments}/>
@@ -17,8 +18,6 @@ export const Post = ({addCommentClick, comments, post}) => (
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F5FCFF',
-        flex: 1,
         padding: 10
     },
     separator: {

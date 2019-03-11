@@ -3,7 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 
 import {postService} from '../../services';
 
-export const PostHeader = ({post: {authorId, body, comments_count, created_at, title}}) => (
+export const PostHeader = ({post: {author_id, body, comments_count, created_at, title}}) => (
     <View>
         <View style={styles.dateContainer}>
             <Text>{postService.formatDate(created_at)}</Text>
@@ -13,7 +13,7 @@ export const PostHeader = ({post: {authorId, body, comments_count, created_at, t
 
         <Text style={styles.body}>{body}</Text>
 
-        <Text style={styles.author}>By {authorId}</Text>
+        <Text style={styles.author}>By {author_id}</Text>
 
         <Text>{comments_count} comments</Text>
     </View>

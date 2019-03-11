@@ -2,9 +2,10 @@ import React from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
 import Separator from '../common/Separator';
+import defaultStyles, { styleConstants } from '../../styles';
 
 export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', title = ''}) => (
-    <View style={styles.container}>
+    <View style={{...defaultStyles.container, ...styles.container}}>
 
         <View style={styles.formField}>
             <TextInput
@@ -33,6 +34,7 @@ export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', ti
             <Button 
                 onPress={savePost}
                 title='Create Post'
+                color={styleConstants.palette.primary}
             />
         </View>
     </View>
@@ -41,8 +43,6 @@ export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', ti
 const styles = StyleSheet.create({
     button: {},
     container: {
-        backgroundColor: '#F5FCFF',
-        flex: 1,
         flexDirection: 'column',
         fontSize: 18,
         padding: 10,

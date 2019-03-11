@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import IconButton from '../common/IconButton';
+import {styleConstants} from '../../styles';
 
 export const AddCommentsButton = ({onClick}) => (
     <IconButton
@@ -10,7 +11,7 @@ export const AddCommentsButton = ({onClick}) => (
         icon={{
             name: 'plus',
             size: 28,
-            color: '#FFFFFF'
+            color: styleConstants.palette.white
         }}
     />
 )
@@ -18,11 +19,11 @@ export const AddCommentsButton = ({onClick}) => (
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#007AFF',
+        backgroundColor: styleConstants.palette.primary,
         justifyContent: 'center',
         position: 'absolute',
 
-        borderColor: '#007AFF',
+        borderColor: styleConstants.palette.primary,
         borderRadius: 100,
         borderWidth:1,
 

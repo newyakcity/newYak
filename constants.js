@@ -1,3 +1,5 @@
+import {headerStyle, styleConstants} from './styles';
+
 export const api = 'http://newyak.test/api';
 
 export const FETCH_CONFIG = {
@@ -9,6 +11,11 @@ export const FETCH_CONFIG = {
 }
 
 export const MAX_POST_LENGTH = 60;
+
+export const defaultNavigationOptions = {
+    headerStyle,
+    headerTintColor: styleConstants.palette.white
+}
 
 export const commentUrl = `${api}/comment`;
 export const postUrl = `${api}/post`;
