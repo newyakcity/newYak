@@ -17,7 +17,10 @@ export class PostListContainer extends Component {
 
     static navigationOptions = props => ({
       headerTitle: <Title/>,
-      headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>
+      headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>,
+      headerStyle: {
+        backgroundColor: '#f0932b'
+      }
     })
 
     getPosts = async () => {
@@ -60,6 +63,6 @@ export class PostListContainer extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#F5FCFF',
+      backgroundColor: '#dff9fb'
     }
 });

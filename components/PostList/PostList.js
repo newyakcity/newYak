@@ -20,6 +20,6 @@ export const PostList = ({posts, onPostClick}) => (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#dff9fb',
     }
 });

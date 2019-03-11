@@ -8,7 +8,7 @@ export default ({onClick}) => (
         icon={{
             name: 'edit',
             size: 28,
-            color: '#007aff'
+            color: '#FFFFFF'
         }}
         containerStyle={styles.iconView}
     />
