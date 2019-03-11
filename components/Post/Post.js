@@ -9,7 +9,7 @@ import defaultStyles from '../../styles';
 
 export const Post = ({addCommentClick, comments, post}) => (
     <View style={{...defaultStyles.container, ...styles.container}}>
-        <PostHeader post={post}/>
+        <PostHeader post={post} commentCount={comments.length}/>
         <Separator style={styles.separator}/>
         <Comments comments={comments}/>
         <AddCommentsButton onClick={addCommentClick}/>
