@@ -7,9 +7,9 @@ import Loading from '../common/Loading';
 
 import {locationService, postService} from '../../services';
 
-import defaultStyles, { styleConstants } from '../../styles';
+import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
-import IconButton from '../common/IconButton';
+import NavButton from '../common/NavButton';
 
 export class CreatePostContainer extends Component {
     constructor(props) {
@@ -29,17 +29,7 @@ export class CreatePostContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
-    getSaveButton = () => (
-        <IconButton
-            onClick={this.savePost}
-            icon={{
-                name: 'save',
-                size: 28,
-                color: styleConstants.palette.white
-            }}
-            containerStyle={styles.iconView}
-        />
-    )
+    getSaveButton = () => (<NavButton icon='save' onClick={this.savePost}/>)
 
     savePost = async () => {
         this.setState({loading: true});

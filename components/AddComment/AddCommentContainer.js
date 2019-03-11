@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 import {AddComment} from './AddComment';
 import Loading from '../common/Loading';
-import IconButton from '../common/IconButton';
 
 import { postService } from '../../services';
 
-import defaultStyles, {styleConstants} from '../../styles';
+import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
+import NavButton from '../common/NavButton';
 
 export class AddCommentContainer extends Component {
     constructor(props) {
@@ -27,17 +27,7 @@ export class AddCommentContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
-    getSaveButton = () => (
-        <IconButton
-            onClick={this.addComment}
-            icon={{
-                name: 'save',
-                size: 28,
-                color: styleConstants.palette.white
-            }}
-            containerStyle={styles.iconView}
-        />
-    )
+    getSaveButton = () => (<NavButton onClick={this.addComment} icon='save'/>)
 
     addComment = async () => {
         this.setState({loading: true});
@@ -76,9 +66,3 @@ export class AddCommentContainer extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    iconView: {
-        marginRight: 10
-    }
-})
