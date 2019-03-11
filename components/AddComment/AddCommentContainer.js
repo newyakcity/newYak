@@ -8,6 +8,7 @@ import { postService } from '../../services';
 
 import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
+import NavButton from '../common/NavButton';
 
 export class AddCommentContainer extends Component {
     constructor(props) {
@@ -17,11 +18,16 @@ export class AddCommentContainer extends Component {
             comment: '',
             loading: false
         }
+
+        this.props.navigation.setParams({saveButton: this.getSaveButton()})
     }
 
     static navigationOptions = props => ({
-        ...defaultNavigationOptions
-      })
+        ...defaultNavigationOptions,
+        headerRight: props.navigation.getParam('saveButton')
+    })
+
+    getSaveButton = () => (<NavButton onClick={this.addComment} icon='save'/>)
 
     addComment = async () => {
         this.setState({loading: true});
@@ -49,8 +55,7 @@ export class AddCommentContainer extends Component {
             <SafeAreaView style={defaultStyles.container}>
                 <Loading loading={loading}/>
                 {!loading && 
-                    <AddComment 
-                        addComment={this.addComment}
+                    <AddComment
                         onCommentChange={this.onCommentChange}
                         postAuthor={post.author_id}
                         postBody={post.body}

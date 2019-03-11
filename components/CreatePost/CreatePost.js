@@ -27,21 +27,10 @@ export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', ti
                 placeholder={'Great post about stuff'}
             />
         </View>
-
-        <Separator style={styles.separator}/>
-
-        <View style={styles.button}>
-            <Button 
-                onPress={savePost}
-                title='Create Post'
-                color={styleConstants.palette.primary}
-            />
-        </View>
     </View>
 )
 
 const styles = StyleSheet.create({
-    button: {},
     container: {
         flexDirection: 'column',
         fontSize: 18,

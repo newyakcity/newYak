@@ -5,6 +5,7 @@ import {Post} from './Post';
 import {postService} from '../../services';
 import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
+import NavButton from '../common/NavButton';
 
 export class PostContainer extends Component {
   constructor(props) {
@@ -17,11 +18,14 @@ export class PostContainer extends Component {
   }
 
   static navigationOptions = props => ({
-    ...defaultNavigationOptions
-  })
-
-  addCommentClick = () => this.props.navigation.navigate('AddComment', {
-    post: this.props.navigation.getParam('post')
+    ...defaultNavigationOptions,
+    headerRight: (
+      <NavButton icon='plus' onClick={() => {
+        props.navigation.navigate('AddComment', {
+          post: props.navigation.getParam('post')
+        })
+      }}/>
+    )
   })
 
   getPostComments = async () => {
