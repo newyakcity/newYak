@@ -11,7 +11,8 @@ export class PostContainer extends Component {
       super(props);
   
       this.state = {
-        comments: []
+        comments: [],
+        loadingComments: false
       }
   }
 
@@ -24,11 +25,19 @@ export class PostContainer extends Component {
   })
 
   getPostComments = async () => {
-    const post = this.props.navigation.getParam('post');
+    this.setState({loadingComments: true});
 
-    const comments = await postService.getPostComments(post.id);
+    try {
+      const post = this.props.navigation.getParam('post');
 
-    this.setState({comments});
+      const comments = await postService.getPostComments(post.id);
+
+      this.setState({comments});
+    } catch(e) {
+      console.log(e);
+    } finally {
+      this.setState({loadingComments: false});
+    }
   }
 
   componentDidMount() {
@@ -43,13 +52,14 @@ export class PostContainer extends Component {
 
   render() {
     const post = this.props.navigation.getParam('post');
-    const {comments} = this.state;
+    const {comments, loadingComments} = this.state;
 
     return (
       <SafeAreaView style={{...defaultStyles.container, ...styles.container}}>
         <Post 
           addCommentClick={this.addCommentClick}
           comments={comments}
+          loadingComments={loadingComments}
           post={post}
         />
       </SafeAreaView>
