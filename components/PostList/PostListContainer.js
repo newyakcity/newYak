@@ -8,12 +8,14 @@ import {locationService, postService} from '../../services';
 import Title from './Title';
 import CreatePostButton from './CreatePostButton';
 import { defaultNavigationOptions } from '../../constants';
+import Loading from '../common/Loading';
 
 export class PostListContainer extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
+          loading: false,
           posts: []
         }
     }
@@ -26,6 +28,8 @@ export class PostListContainer extends Component {
 
     getPosts = async () => {
       try{
+        this.setState({loading: true});
+
         const locationData = await locationService.getLocation();
         
         const {latitude, longitude} = locationData.coords;
@@ -35,6 +39,8 @@ export class PostListContainer extends Component {
         this.setState({posts});
       } catch(e) {
         console.log(e);
+      } finally {
+        this.setState({loading: false});
       }
     }
 
@@ -51,11 +57,14 @@ export class PostListContainer extends Component {
     navigate = post => this.props.navigation.navigate('Post', {post});
 
     render() {
-        const {posts} = this.state;
+        const {loading, posts} = this.state;
     
         return (
           <SafeAreaView style={defaultStyles.container}>
-            <PostList posts={posts} onPostClick={this.navigate}/>
+              <Loading loading={loading}/> 
+              {!loading && 
+                <PostList posts={posts} onPostClick={this.navigate} loading={loading}/>
+              }
           </SafeAreaView>
         );
     }
