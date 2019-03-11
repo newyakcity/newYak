@@ -37,7 +37,11 @@ export class PostListContainer extends Component {
     componentDidMount() {
         this.getPosts();
 
-        this.props.navigation.addListener('willFocus', this.getPosts);
+        this._focusListener = this.props.navigation.addListener('willFocus', this.getPosts);
+    }
+
+    componentWillUnmount() {
+      this._focusListener.remove();
     }
 
     navigate = post => this.props.navigation.navigate('Post', {post});

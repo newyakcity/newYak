@@ -1,17 +1,21 @@
 import React from 'react';
-import {TouchableHighlight, StyleSheet, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {StyleSheet} from 'react-native';
+import IconButton from '../common/IconButton';
 
 export default ({onClick}) => (
-    <TouchableHighlight onPress={onClick} style={styles.iconView}>
-        <View>
-            <Icon name="edit" size={28} color="#007aff"></Icon>
-        </View>
-    </TouchableHighlight>
+    <IconButton
+        onClick={onClick}
+        icon={{
+            name: 'edit',
+            size: 28,
+            color: '#007aff'
+        }}
+        containerStyle={styles.iconView}
+    />
 )
 
 const styles = StyleSheet.create({
     iconView: {
         marginRight: 15
     }
-})
+});

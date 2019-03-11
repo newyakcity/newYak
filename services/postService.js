@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { MAX_POST_LENGTH, searchUrl, postUrl, postCommentsUrl, FETCH_CONFIG } from "../constants";
+import { MAX_POST_LENGTH, commentUrl, searchUrl, postUrl, postCommentsUrl, FETCH_CONFIG } from "../constants";
 
 export const postService = {
     // Helper methods 
@@ -13,6 +13,14 @@ export const postService = {
     },
 
     // API methods
+    addComment: async (postId, body) => {
+        const json = {postId, body}
+
+        const res = await postService._postJson(commentUrl, json);
+
+        return res;
+    },
+
     createPost: async (post, coords) => {
         const json = {...post, ...coords}
 
@@ -20,6 +28,7 @@ export const postService = {
 
         return res;
     },
+
     getPost: async id => (await postService._getJson(`${postUrl}/${id}`)),
 
     getPostComments: async id => (await postService._getJson(postCommentsUrl(id))),
