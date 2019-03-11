@@ -2,25 +2,27 @@ import React from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import Separator from '../common/Separator';
 
-import defaultStyles, { styleConstants } from '../../styles';
+import defaultStyles from '../../styles';
 
-export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, comment=''}) => (
+export const AddComment = ({onCommentChange, postAuthor, postBody, comment=''}) => (
     <View style={{...defaultStyles.container, ...styles.container}}>
-
-        <Text>{postAuthor}</Text>
-        <Text style={styles.body}>{postBody}</Text>
+        <View style={styles.paddedContainer}>
+            <Text>{postAuthor}</Text>
+            <Text style={styles.body}>{postBody}</Text>
+        </View>
 
         <Separator/>
-
-        <TextInput
-            maxLength={1000}
-            multiline
-            numberOfLines={10}
-            onChangeText={onCommentChange}
-            value={comment}
-            placeholder={'Great post about stuff'}
-            style={styles.multiline}
-        />
+        <View style={styles.paddedContainer}>
+            <TextInput
+                maxLength={1000}
+                multiline
+                numberOfLines={10}
+                onChangeText={onCommentChange}
+                value={comment}
+                placeholder={'Great post about stuff'}
+                style={styles.multiline}
+            />
+        </View>
     </View>
 )
 
@@ -30,7 +32,9 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     container: {
-        fontSize: 16,
+        fontSize: 16
+    },
+    paddedContainer: {
         padding: 10
     },
     multiline: {

@@ -57,7 +57,7 @@ export class CreatePostContainer extends Component {
         const {body, title, loading} = this.state;
 
         return (
-            <SafeAreaView style={{...defaultStyles.container, ...styles.container}}>
+            <SafeAreaView style={defaultStyles.container}>
                 <Loading loading={loading}/>
                 {!loading && 
                     <CreatePost 
@@ -73,9 +73,6 @@ export class CreatePostContainer extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 10
-    },
     iconView: {
         marginRight: 15
     }

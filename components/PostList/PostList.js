@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import defaultStyles from '../../styles';
 
 import NoPosts from './NoPosts';
@@ -19,5 +19,3 @@ export const PostList = ({posts, onPostClick, onRefresh, refreshing}) => (
         /> 
     </View>
 )
-
-const styles = StyleSheet.create({});
