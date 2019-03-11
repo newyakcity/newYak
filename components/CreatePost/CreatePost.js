@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
 import Separator from '../common/Separator';
-import defaultStyles from '../../styles';
+import defaultStyles, { styleConstants } from '../../styles';
 
 export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', title = ''}) => (
     <View style={{...defaultStyles.container, ...styles.container}}>
@@ -34,6 +34,7 @@ export const CreatePost = ({onPostChange, onTitleChange, savePost, post = '', ti
             <Button 
                 onPress={savePost}
                 title='Create Post'
+                color={styleConstants.palette.primary}
             />
         </View>
     </View>

@@ -3,7 +3,8 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {Post} from './Post';
 import {postService} from '../../services';
-import defaultStyles, {headerStyle} from '../../styles';
+import defaultStyles from '../../styles';
+import { defaultNavigationOptions } from '../../constants';
 
 export class PostContainer extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class PostContainer extends Component {
   }
 
   static navigationOptions = props => ({
-    headerStyle
+    ...defaultNavigationOptions
   })
 
   addCommentClick = () => this.props.navigation.navigate('AddComment', {

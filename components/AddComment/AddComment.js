@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import Separator from '../common/Separator';
 
-import defaultStyles from '../../styles';
+import defaultStyles, { styleConstants } from '../../styles';
 
 export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, comment=''}) => (
     <View style={{...defaultStyles.container, ...styles.container}}>
@@ -28,6 +28,7 @@ export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, c
             <Button 
                 onPress={addComment}
                 title='Add Comment'
+                color={styleConstants.palette.primary}
             />
         </View>
     </View>

@@ -4,7 +4,8 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {CreatePost} from './CreatePost';
 import {locationService, postService} from '../../services';
-import defaultStyles, {headerStyle} from '../../styles';
+import defaultStyles from '../../styles';
+import { defaultNavigationOptions } from '../../constants';
 
 export class CreatePostContainer extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export class CreatePostContainer extends Component {
     }
 
     static navigationOptions = props => ({
-        headerStyle
+        ...defaultNavigationOptions
     })
 
     savePost = async () => {

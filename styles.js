@@ -12,6 +12,10 @@ export const headerStyle = {
     backgroundColor: styleConstants.palette.primary
 }
 
+export const titleStyle = {
+    color: styleConstants.palette.white,
+}
+
 export default StyleSheet.create({
     container: {
         backgroundColor: styleConstants.palette.white,

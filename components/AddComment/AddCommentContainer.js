@@ -3,7 +3,8 @@ import {SafeAreaView} from 'react-native';
 
 import {AddComment} from './AddComment';
 import { postService } from '../../services';
-import defaultStyles, {headerStyle} from '../../styles';
+import defaultStyles from '../../styles';
+import { defaultNavigationOptions } from '../../constants';
 
 export class AddCommentContainer extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export class AddCommentContainer extends Component {
     }
 
     static navigationOptions = props => ({
-        headerStyle
+        ...defaultNavigationOptions
       })
 
     addComment = async () => {
