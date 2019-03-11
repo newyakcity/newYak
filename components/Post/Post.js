@@ -17,7 +17,6 @@ export const Post = ({comments, loadingComments, post, onRefresh, refreshingComm
 const styles = StyleSheet.create({
     separator: {
         marginTop: 10,
-        marginBottom: 10
     }
 });
   
