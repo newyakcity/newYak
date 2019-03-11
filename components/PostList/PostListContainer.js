@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
+
+import defaultStyles, {headerStyle} from '../../styles';
 
 import {PostList} from './PostList';
 import {locationService, postService} from '../../services';
@@ -18,9 +20,7 @@ export class PostListContainer extends Component {
     static navigationOptions = props => ({
       headerTitle: <Title/>,
       headerRight: <CreatePostButton onClick={() => props.navigation.navigate('CreatePost')}/>,
-      headerStyle: {
-        backgroundColor: '#f0932b'
-      }
+      headerStyle
     })
 
     getPosts = async () => {
@@ -53,16 +53,11 @@ export class PostListContainer extends Component {
         const {posts} = this.state;
     
         return (
-          <SafeAreaView style={styles.container}>
+          <SafeAreaView style={defaultStyles.container}>
             <PostList posts={posts} onPostClick={this.navigate}/>
           </SafeAreaView>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#dff9fb'
-    }
-});
+const styles = StyleSheet.create({});

@@ -4,6 +4,7 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {CreatePost} from './CreatePost';
 import {locationService, postService} from '../../services';
+import defaultStyles, {headerStyle} from '../../styles';
 
 export class CreatePostContainer extends Component {
     constructor(props) {
@@ -14,6 +15,10 @@ export class CreatePostContainer extends Component {
             body: ''
         }
     }
+
+    static navigationOptions = props => ({
+        headerStyle
+    })
 
     savePost = async () => {
         const locationData = await locationService.getLocation();
@@ -33,7 +38,7 @@ export class CreatePostContainer extends Component {
         const {body, title} = this.state;
 
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={{...defaultStyles.container, ...styles.container}}>
                 <CreatePost 
                     onPostChange={body => this.setState({body})}
                     onTitleChange={title => this.setState({title})}
@@ -48,8 +53,6 @@ export class CreatePostContainer extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F5FCFF',
-        flex: 1,
         padding: 10
     }
 });

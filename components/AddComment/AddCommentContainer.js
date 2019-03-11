@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {SafeAreaView} from 'react-native';
+
 import {AddComment} from './AddComment';
 import { postService } from '../../services';
+import defaultStyles, {headerStyle} from '../../styles';
 
 export class AddCommentContainer extends Component {
     constructor(props) {
@@ -10,6 +13,10 @@ export class AddCommentContainer extends Component {
             comment: ''
         }
     }
+
+    static navigationOptions = props => ({
+        headerStyle
+      })
 
     addComment = async () => {
         const post = this.props.navigation.getParam('post');
@@ -26,13 +33,15 @@ export class AddCommentContainer extends Component {
         const {comment} = this.state;
 
         return (
-            <AddComment 
-                addComment={this.addComment}
-                onCommentChange={this.onCommentChange}
-                postAuthor={post.authorId}
-                postBody={post.body}
-                comment={comment}
-            />
+            <SafeAreaView style={defaultStyles.container}>
+                <AddComment 
+                    addComment={this.addComment}
+                    onCommentChange={this.onCommentChange}
+                    postAuthor={post.authorId}
+                    postBody={post.body}
+                    comment={comment}
+                />
+            </SafeAreaView>
         )
     }
 }
