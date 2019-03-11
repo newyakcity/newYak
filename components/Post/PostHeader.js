@@ -5,7 +5,8 @@ import {postService} from '../../services';
 
 export const PostHeader = ({post: {username: {username}, body, created_at, title}, commentCount}) => (
     <View>
-        <View style={styles.dateContainer}>
+        <View style={styles.header}>
+            <Text style={styles.author}>{username}</Text>
             <Text>{postService.formatDate(created_at)}</Text>
         </View>
 
@@ -13,24 +14,21 @@ export const PostHeader = ({post: {username: {username}, body, created_at, title
 
         <Text style={styles.body}>{body}</Text>
 
-        <Text style={styles.author}>By {username}</Text>
-
         <Text>{commentCount} comments</Text>
     </View>
 )
 
 const styles = StyleSheet.create({
     author: {
-        marginBottom: 5
+        marginRight: 10
     },
     body: {
         fontSize: 18,
-        marginBottom: 20
+        marginBottom: 15
     },
-    dateContainer: {
-        justifyContent: 'flex-end',
+    header: {
         flexDirection: 'row',
-        marginBottom: 10
+        marginBottom: 10,
     },
     title: {
         fontSize: 16,
