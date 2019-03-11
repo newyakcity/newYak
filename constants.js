@@ -1,6 +1,7 @@
 import {headerStyle, styleConstants} from './styles';
 
-export const api = 'http://newyak.test/api';
+//export const api = 'http://newyak.test/api';
+export const api = 'http://157.230.53.198/api';
 
 export const FETCH_CONFIG = {
     method: 'POST',
