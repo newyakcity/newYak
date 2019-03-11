@@ -13,7 +13,8 @@ export class PostContainer extends Component {
   
       this.state = {
         comments: [],
-        loadingComments: false
+        loadingComments: false,
+        refreshingComments: false,
       }
   }
 
@@ -28,8 +29,16 @@ export class PostContainer extends Component {
     )
   })
 
-  getPostComments = async () => {
-    this.setState({loadingComments: true});
+  toggleLoad = (refresh, val) => {
+    if(refresh === true) {
+      this.setState({refreshingComments: val})
+    } else {
+      this.setState({loadingComments: val});
+    }
+  }
+
+  getPostComments = async (refresh) => {
+    this.toggleLoad(refresh, true);
 
     try {
       const post = this.props.navigation.getParam('post');
@@ -40,7 +49,7 @@ export class PostContainer extends Component {
     } catch(e) {
       alert('Unable to load posts');
     } finally {
-      this.setState({loadingComments: false});
+      this.toggleLoad(refresh, false);
     }
   }
 
@@ -56,7 +65,7 @@ export class PostContainer extends Component {
 
   render() {
     const post = this.props.navigation.getParam('post');
-    const {comments, loadingComments} = this.state;
+    const {comments, loadingComments, refreshingComments} = this.state;
 
     return (
       <SafeAreaView style={{...defaultStyles.container, ...styles.container}}>
@@ -65,6 +74,8 @@ export class PostContainer extends Component {
           comments={comments}
           loadingComments={loadingComments}
           post={post}
+          onRefresh={this.getPostComments.bind(this, true)}
+          refreshingComments={refreshingComments}
         />
       </SafeAreaView>
     );

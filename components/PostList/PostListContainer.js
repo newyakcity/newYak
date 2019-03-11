@@ -9,6 +9,7 @@ import Title from './Title';
 import CreatePostButton from './CreatePostButton';
 import { defaultNavigationOptions } from '../../constants';
 import Loading from '../common/Loading';
+import { throwStatement } from '@babel/types';
 
 export class PostListContainer extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export class PostListContainer extends Component {
     
         this.state = {
           loading: false,
+          refreshing: false,
           posts: []
         }
     }
@@ -26,9 +28,17 @@ export class PostListContainer extends Component {
       ...defaultNavigationOptions
     })
 
-    getPosts = async () => {
+    toggleLoad = (refresh, val) => {
+      if(refresh === true) {
+        this.setState({refreshing: val})
+      } else {
+        this.setState({loading: val});
+      }
+    }
+
+    getPosts = async refresh => {
       try{
-        this.setState({loading: true});
+        this.toggleLoad(refresh, true);
 
         const locationData = await locationService.getLocation();
         
@@ -40,7 +50,7 @@ export class PostListContainer extends Component {
       } catch(e) {
         alert('Unable to retrieve posts. Please try again.');
       } finally {
-        this.setState({loading: false});
+        this.toggleLoad(refresh, false);
       }
     }
 
@@ -57,13 +67,18 @@ export class PostListContainer extends Component {
     navigate = post => this.props.navigation.navigate('Post', {post});
 
     render() {
-        const {loading, posts} = this.state;
+        const {loading, posts, refreshing} = this.state;
     
         return (
           <SafeAreaView style={defaultStyles.container}>
               <Loading loading={loading}/> 
               {!loading && 
-                <PostList posts={posts} onPostClick={this.navigate} loading={loading}/>
+                <PostList 
+                  posts={posts} 
+                  onPostClick={this.navigate} 
+                  onRefresh={this.getPosts.bind(this, true)}
+                  refreshing={refreshing}
+                />
               }
           </SafeAreaView>
         );
