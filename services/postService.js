@@ -49,7 +49,7 @@ export const postService = {
         if(res.status === 400) {
             throw new Error(postService._mapErrors(json));
         } else if (res.status > 400) {
-            console.log(res, json);
+            (res, json);
             throw new Error('api error');
         } else {
             return json;
@@ -67,7 +67,7 @@ export const postService = {
         if(res.status === 400) {
             throw new Error(postService._mapErrors(json));
         } else if (res.status > 400) {
-            console.log(res, json);
+            (res, json);
             throw new Error('api error');
         } else {
             return json;

@@ -5,7 +5,7 @@ import { postService } from '../../../services';
 export default ({comment}) => (
     <View style={styles.container}>
         <View style={styles.header}>
-            <Text>{comment.author_id}</Text>
+            <Text>{comment.username.username}</Text>
             <Text>{postService.formatDate(comment.created_at)}</Text>
         </View>
 
