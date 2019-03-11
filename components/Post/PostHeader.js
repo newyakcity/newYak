@@ -4,7 +4,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {postService} from '../../services';
 
 export const PostHeader = ({post: {username: {username}, body, created_at, title}, commentCount}) => (
-    <View>
+    <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.author}>{username}</Text>
             <Text>{postService.formatDate(created_at)}</Text>
@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     body: {
         fontSize: 18,
         marginBottom: 15
+    },
+    container: {
+        padding: 10
     },
     header: {
         flexDirection: 'row',

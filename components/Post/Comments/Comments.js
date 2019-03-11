@@ -25,7 +25,8 @@ export const Comments = ({comments, loading, onRefresh, refreshing}) => (
 
 const styles = StyleSheet.create({
     container: {
-        minHeight: '80%'
+        minHeight: '80%',
+        padding: 10
     },
     list: {
         flex: 1

@@ -7,7 +7,7 @@ import Separator from '../common/Separator';
 import defaultStyles from '../../styles';
 
 export const Post = ({comments, loadingComments, post, onRefresh, refreshingComments}) => (
-    <View style={[defaultStyles.container, styles.container]}>
+    <View style={defaultStyles.container}>
         <PostHeader post={post} commentCount={comments.length}/>
         <Separator style={styles.separator}/>
         <Comments comments={comments} loading={loadingComments} onRefresh={onRefresh} refreshing={refreshingComments}/>
@@ -15,9 +15,6 @@ export const Post = ({comments, loadingComments, post, onRefresh, refreshingComm
 )
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 10
-    },
     separator: {
         marginTop: 10,
         marginBottom: 10
