@@ -3,7 +3,13 @@ import { MAX_POST_LENGTH, commentUrl, searchUrl, postUrl, postCommentsUrl, FETCH
 
 export const postService = {
     // Helper methods 
-    formatDate: date => moment(date).format('MMMM Do YYYY, h:mm a'),
+    formatDate: date => {
+        const diff = moment.duration(moment.utc().diff(moment.utc(date)));
+
+        const diffHours = Math.round(diff.asHours());
+
+        return diffHours > 0 ? `${diffHours}h` : `${Math.ceil(diff.asMinutes())}m`;
+    },
 
     getShortenedBody: postBody => {
         if(postBody.length < MAX_POST_LENGTH)
