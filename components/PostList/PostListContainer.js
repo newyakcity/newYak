@@ -38,7 +38,7 @@ export class PostListContainer extends Component {
 
         this.setState({posts});
       } catch(e) {
-        console.log(e);
+        alert('Unable to retrieve posts. Please try again.');
       } finally {
         this.setState({loading: false});
       }
