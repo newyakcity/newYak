@@ -33,7 +33,7 @@ export class AddCommentContainer extends Component {
 
             this.props.navigation.goBack();
         } catch(e) {
-            console.log(e);
+            alert('Unable to save your comment. Please try again.');
         } finally {
             this.setState({loading: false});
         }

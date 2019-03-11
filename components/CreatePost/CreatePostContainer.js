@@ -41,7 +41,7 @@ export class CreatePostContainer extends Component {
             this.props.navigation.dispatch(resetAction);
             this.props.navigation.navigate('Post', {post});
         } catch(e) {
-            console.log(e);
+            alert('Unable to save your post. Please try again.');
         } finally{
             this.setState({loading: false});
         }
