@@ -4,8 +4,9 @@ import Separator from '../common/Separator';
 
 export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, comment=''}) => (
     <View style={styles.container}>
+
         <Text>{postAuthor}</Text>
-        <Text>{postBody}</Text>
+        <Text style={styles.body}>{postBody}</Text>
 
         <Separator/>
 
@@ -31,8 +32,14 @@ export const AddComment = ({addComment, onCommentChange, postAuthor, postBody, c
 )
 
 const styles = StyleSheet.create({
+    body: {
+        marginTop: 10,
+        marginBottom: 20
+    },
     container: {
-        flex: 1
+        flex: 1,
+        fontSize: 16,
+        padding: 10
     },
     multiline: {
         height: '80%'
