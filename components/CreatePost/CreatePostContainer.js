@@ -29,7 +29,7 @@ export class CreatePostContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
-    getSaveButton = () => (<NavButton icon='save' onClick={this.savePost}/>)
+    getSaveButton = () => (<NavButton icon='check' onClick={this.savePost}/>)
 
     navigateHome = (post) => {
         const resetAction = StackActions.reset({

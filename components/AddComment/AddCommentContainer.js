@@ -27,7 +27,7 @@ export class AddCommentContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
-    getSaveButton = () => (<NavButton onClick={this.addComment} icon='save'/>)
+    getSaveButton = () => (<NavButton onClick={this.addComment} icon='paper-plane'/>)
 
     addComment = async () => {
         let res;
