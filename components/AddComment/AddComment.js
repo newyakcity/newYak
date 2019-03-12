@@ -12,8 +12,10 @@ export const AddComment = ({onCommentChange, postAuthor, postBody, comment=''}) 
         </View>
 
         <Separator/>
+
         <View style={styles.paddedContainer}>
             <TextInput
+                style={styles.input}
                 maxLength={1000}
                 multiline
                 numberOfLines={10}
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
     },
     paddedContainer: {
         padding: 10
+    },
+    input: {
+        flex: 1
     },
     multiline: {
         height: '80%'

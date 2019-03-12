@@ -9,6 +9,7 @@ export const CreatePost = ({onPostChange, onTitleChange, post = '', title = ''})
 
         <View style={styles.formField}>
             <TextInput
+                style={styles.input}
                 onChangeText={onTitleChange}
                 value={title}
                 placeholder={'Post title'}
@@ -19,6 +20,7 @@ export const CreatePost = ({onPostChange, onTitleChange, post = '', title = ''})
         
         <View style={[styles.formField, styles.multiline]}>
             <TextInput
+                style={styles.input}
                 maxLength={1000}
                 multiline={true}
                 numberOfLines={10}
@@ -42,5 +44,8 @@ const styles = StyleSheet.create({
     },
     multiline: {
         height: '80%'
-    }
+    },
+    input: {
+        flex: 1
+    },
 });
