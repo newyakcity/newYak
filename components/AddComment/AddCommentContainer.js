@@ -30,18 +30,21 @@ export class AddCommentContainer extends Component {
     getSaveButton = () => (<NavButton onClick={this.addComment} icon='save'/>)
 
     addComment = async () => {
+        let res;
+
         this.setState({loading: true});
 
         try{
             const post = this.props.navigation.getParam('post');
 
-            await postService.addComment(post.id, this.state.comment);
-
-            this.props.navigation.goBack();
+            res = await postService.addComment(post.id, this.state.comment);
         } catch(e) {
+            console.log(e);
             alert('Unable to save your comment. Please try again.');
         } finally {
             this.setState({loading: false});
+
+            res && this.props.navigation.goBack();
         }
     }
 

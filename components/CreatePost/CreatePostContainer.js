@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavigationActions, StackActions} from 'react-navigation';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 import {CreatePost} from './CreatePost';
 import Loading from '../common/Loading';
@@ -31,25 +31,33 @@ export class CreatePostContainer extends Component {
 
     getSaveButton = () => (<NavButton icon='save' onClick={this.savePost}/>)
 
+    navigateHome = (post) => {
+        const resetAction = StackActions.reset({
+            index: 0, 
+            actions: [NavigationActions.navigate({ routeName: 'Home' })]
+        });
+
+        this.props.navigation.dispatch(resetAction);
+
+        this.props.navigation.navigate('Post', {post});
+    }
+
     savePost = async () => {
+        let post;
+
         this.setState({loading: true});
 
         try {
             const locationData = await locationService.getLocation();
 
-            const post = await postService.createPost({...this.state}, locationData.coords);
-            
-            const resetAction = StackActions.reset({
-                index: 0, 
-                actions: [NavigationActions.navigate({ routeName: 'Home' })]
-            })
-            
-            this.props.navigation.dispatch(resetAction);
-            this.props.navigation.navigate('Post', {post});
+            post = await postService.createPost({...this.state}, locationData.coords);
         } catch(e) {
+            console.log(e);
             alert('Unable to save your post. Please try again.');
         } finally{
             this.setState({loading: false});
+
+            post && this.navigateHome(post);
         }
     }
 
@@ -71,9 +79,3 @@ export class CreatePostContainer extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    iconView: {
-        marginRight: 15
-    }
-});

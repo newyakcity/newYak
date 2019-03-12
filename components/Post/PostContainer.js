@@ -47,6 +47,7 @@ export class PostContainer extends Component {
 
       this.setState({comments});
     } catch(e) {
+      console.log(e);
       alert('Unable to load posts');
     } finally {
       this.toggleLoad(refresh, false);

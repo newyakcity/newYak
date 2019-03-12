@@ -43,13 +43,13 @@ export const postService = {
     
     _getJson: async url => {
         const res = await fetch(url);
-
+        console.log(res);
         const json = await res.json();
 
         if(res.status === 400) {
             throw new Error(postService._mapErrors(json));
         } else if (res.status > 400) {
-            (res, json);
+            console.log(res, json);
             throw new Error('api error');
         } else {
             return json;
