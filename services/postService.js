@@ -1,7 +1,8 @@
 import moment from 'moment';
-import { MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
-import {service} from './service';
 import {Subject} from 'rxjs/Subject';
+
+import {service} from './service';
+import {MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
 
 export const postService = {
     collectionObserver: new Subject(),
@@ -30,25 +31,15 @@ export const postService = {
 
         return res;
     },
-
-<<<<<<< HEAD
-    getPost: async id => (await service._getJson(`${postUrl}/${id}`)),
-
-    search: async (lat, lng) => (await service._getJson(searchUrl(lat,lng))),
-=======
     getPost: async id => {
-        const res = await postService._getJson(`${postUrl}/${id}`);
+        const res = await service._getJson(`${postUrl}/${id}`);
 
         postObserver.next(res);
     },
 
-    getPostComments: async id => (await postService._getJson(postCommentsUrl(id))),
-
     search: async (lat, lng) => {
-        const res = await postService._getJson(searchUrl(lat,lng));
+        const res = await service._getJson(searchUrl(lat,lng));
         
         postService.collectionObserver.next(res);
-    },
->>>>>>> add observables to service
-    
+    }
 }
