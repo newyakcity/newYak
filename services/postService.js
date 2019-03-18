@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {from} from 'rxjs';
 import {Subject} from 'rxjs/Subject';
 
 import {service} from './service';
@@ -24,13 +25,16 @@ export const postService = {
     },
 
     // API methods
-    createPost: async (post, coords) => {
+    createPost: (post, coords) => from(postService._createPost(post, coords)),
+
+    _createPost: async (post, coords) => {
         const json = {...post, ...coords}
 
         const res = await service._postJson(postUrl, json);
 
         return res;
     },
+
     getPost: async id => {
         const res = await service._getJson(`${postUrl}/${id}`);
 

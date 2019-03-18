@@ -47,18 +47,23 @@ export class CreatePostContainer extends Component {
 
         this.setState({loading: true});
 
-        try {
-            const locationData = await locationService.getLocation();
+        const locationData = await locationService.getLocation();
 
-            post = await postService.createPost({...this.state}, locationData.coords);
-        } catch(e) {
-            console.log(e);
-            alert('Unable to save your post. Please try again.');
-        } finally{
-            this.setState({loading: false});
-
-            post && this.navigateHome(post);
-        }
+        postService.createPost({...this.state}, locationData.coords)
+            .subscribe(
+                data => {
+                    post = data;
+                },
+                error => {
+                    console.log(error);
+                    alert('Unable to save your post. Please try again.');
+                },
+                () => {
+                    this.setState({loading: false});
+    
+                    post && this.navigateHome(post);
+                }
+            );
     }
 
     render() {
