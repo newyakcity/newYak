@@ -34,7 +34,7 @@ export const postService = {
     getPost: async id => {
         const res = await service._getJson(`${postUrl}/${id}`);
 
-        postObserver.next(res);
+        postService.postObserver.next(res);
     },
 
     search: async (lat, lng) => {

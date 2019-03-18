@@ -21,7 +21,7 @@ export class PostListContainer extends Component {
         }
 
         postService.collectionObserver
-          .subscribe(posts => this.setState({posts}));
+          .subscribe(posts => this.toggleLoad(this.state.refreshing, false, {posts}));
     }
 
     componentWillUnmount() {
@@ -34,11 +34,11 @@ export class PostListContainer extends Component {
       ...defaultNavigationOptions
     })
 
-    toggleLoad = (refresh, val, ...params) => {
+    toggleLoad = (refresh, val, extras = {}) => {
       if(refresh === true) {
-        this.setState({refreshing: val, ...params})
+        this.setState({refreshing: val, ...extras})
       } else {
-        this.setState({loading: val, ...params});
+        this.setState({loading: val, ...extras});
       }
     }
 
@@ -52,8 +52,6 @@ export class PostListContainer extends Component {
         
         postService.search(latitude, longitude);
       } catch(e) {
-        console.log(e);
-
         this.toggleLoad(refresh, false);
 
         alert('Unable to retrieve posts. Please try again.');
