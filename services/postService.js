@@ -1,11 +1,11 @@
 import moment from 'moment';
 import { MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
 import {service} from './service';
-import RxJS from 'rxjs';
+import {Subject} from 'rxjs/Subject';
 
 export const postService = {
-    collectionObserver: new RxJS.observable(),
-    postObserver: new RxJS.observable(),
+    collectionObserver: new Subject(),
+    postObserver: new Subject(),
     // Helper methods 
     formatDate: date => {
         const diff = moment.duration(moment.utc().diff(moment.utc(date)));
