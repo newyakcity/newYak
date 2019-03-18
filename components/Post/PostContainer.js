@@ -16,6 +16,13 @@ export class PostContainer extends Component {
         loadingComments: false,
         refreshingComments: false,
       }
+
+      commentService.collectionObserver
+        .subscribe(comments => this.toggleLoad(this.state.refreshingComments, false, {comments}))
+  }
+
+  componentWillUnmount() {
+    commentService.collectionObserver.unsubscribe();
   }
 
   static navigationOptions = props => ({
@@ -29,28 +36,24 @@ export class PostContainer extends Component {
     )
   })
 
-  toggleLoad = (refresh, val) => {
+  toggleLoad = (refresh, val, extras = {}) => {
     if(refresh === true) {
-      this.setState({refreshingComments: val})
+      this.setState({refreshingComments: val, ...extras})
     } else {
-      this.setState({loadingComments: val});
+      this.setState({loadingComments: val, ...extras});
     }
   }
 
   getPostComments = async (refresh) => {
-    this.toggleLoad(refresh, true);
-
     try {
+      this.toggleLoad(refresh, true);
+
       const post = this.props.navigation.getParam('post');
 
-      const comments = await commentService.getPostComments(post.id);
-
-      this.setState({comments});
+      commentService.getPostComments(post.id);
     } catch(e) {
       console.log(e);
       alert('Unable to load posts');
-    } finally {
-      this.toggleLoad(refresh, false);
     }
   }
 
