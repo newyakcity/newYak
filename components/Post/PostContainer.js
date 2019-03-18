@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
 import {Post} from './Post';
-import {postService} from '../../services';
+import {commentService} from '../../services';
 import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
 import NavButton from '../common/NavButton';
@@ -43,7 +43,7 @@ export class PostContainer extends Component {
     try {
       const post = this.props.navigation.getParam('post');
 
-      const comments = await postService.getPostComments(post.id);
+      const comments = await commentService.getPostComments(post.id);
 
       this.setState({comments});
     } catch(e) {

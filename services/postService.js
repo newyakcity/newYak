@@ -1,5 +1,6 @@
 import moment from 'moment';
-import { MAX_POST_LENGTH, commentUrl, searchUrl, postUrl, postCommentsUrl, FETCH_CONFIG } from "../constants";
+import { MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
+import {service} from './service';
 
 export const postService = {
     // Helper methods 
@@ -19,68 +20,16 @@ export const postService = {
     },
 
     // API methods
-    addComment: async (postId, body) => {
-        const json = {postId, body}
-
-        const res = await postService._postJson(commentUrl, json);
-
-        return res;
-    },
-
     createPost: async (post, coords) => {
         const json = {...post, ...coords}
 
-        const res = await postService._postJson(postUrl, json);
+        const res = await service._postJson(postUrl, json);
 
         return res;
     },
 
-    getPost: async id => (await postService._getJson(`${postUrl}/${id}`)),
+    getPost: async id => (await service._getJson(`${postUrl}/${id}`)),
 
-    getPostComments: async id => (await postService._getJson(postCommentsUrl(id))),
-
-    search: async (lat, lng) => (await postService._getJson(searchUrl(lat,lng))),
+    search: async (lat, lng) => (await service._getJson(searchUrl(lat,lng))),
     
-    _getJson: async url => {
-        const res = await fetch(url);
-        console.log(res);
-        const json = await res.json();
-
-        if(res.status === 400) {
-            throw new Error(postService._mapErrors(json));
-        } else if (res.status > 400) {
-            console.log(res, json);
-            throw new Error('api error');
-        } else {
-            return json;
-        }
-    },
-
-    _postJson: async (url, jsonContent) => {
-        const res = await fetch(url, {
-            ...FETCH_CONFIG,
-            body: JSON.stringify(jsonContent)
-        });
-        
-        const json = await res.json();
-        
-        if(res.status === 400) {
-            throw new Error(postService._mapErrors(json));
-        } else if (res.status > 400) {
-            (res, json);
-            throw new Error('api error');
-        } else {
-            return json;
-        }
-    },
-
-    _mapErrors: errors => {
-        message = '';
-
-        for(let [key, val] of errors) {
-            message += `${key}:\n${val.join('\n')}\n`;
-        }
-
-        return message;
-    }
 }

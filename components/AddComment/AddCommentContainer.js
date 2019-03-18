@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native';
 import {AddComment} from './AddComment';
 import Loading from '../common/Loading';
 
-import { postService } from '../../services';
+import {commentService} from '../../services';
 
 import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
@@ -37,7 +37,7 @@ export class AddCommentContainer extends Component {
         try{
             const post = this.props.navigation.getParam('post');
 
-            res = await postService.addComment(post.id, this.state.comment);
+            res = await commentService.addComment(post.id, this.state.comment);
         } catch(e) {
             console.log(e);
             alert('Unable to save your comment. Please try again.');
