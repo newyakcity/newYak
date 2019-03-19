@@ -17,12 +17,19 @@ export class PostContainer extends Component {
         refreshingComments: false,
       }
 
-      commentService.collectionObserver
+      this.commentSubscriber = commentService.collectionObserver
         .subscribe(comments => this.toggleLoad(this.state.refreshingComments, false, {comments}))
   }
 
+  componentDidMount() {
+    this.getPostComments();
+
+    this._focusListener = this.props.navigation.addListener('willFocus', this.getPostComments);
+  }
+
   componentWillUnmount() {
-    commentService.collectionObserver.unsubscribe();
+    this._focusListener.remove();
+    this.commentSubscriber.unsubscribe();
   }
 
   static navigationOptions = props => ({
@@ -55,16 +62,6 @@ export class PostContainer extends Component {
       console.log(e);
       alert('Unable to load posts');
     }
-  }
-
-  componentDidMount() {
-    this.getPostComments();
-
-    this._focusListener = this.props.navigation.addListener('willFocus', this.getPostComments);
-  }
-
-  componentWillUnmount() {
-    this._focusListener.remove();
   }
 
   render() {

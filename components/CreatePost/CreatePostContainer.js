@@ -23,7 +23,7 @@ export class CreatePostContainer extends Component {
 
         this.props.navigation.setParams({saveButton: this.getSaveButton()});
 
-        postService.eventObserver.subscribe(
+        this.eventSubscriber = postService.eventObserver.subscribe(
             event => {
                 if(event.type === postService.eventTypes.createPostComplete)
                     this.navigateHome(event.post);
@@ -34,6 +34,10 @@ export class CreatePostContainer extends Component {
                 alert('Unable to save your post. Please try again.');
             }
         );
+    }
+
+    componentWillUnmount() {
+        this.eventSubscriber.unsubscribe();
     }
 
     static navigationOptions = props => ({

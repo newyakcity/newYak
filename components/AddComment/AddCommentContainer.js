@@ -21,11 +21,11 @@ export class AddCommentContainer extends Component {
 
         this.props.navigation.setParams({saveButton: this.getSaveButton()})
 
-        commentService.eventObserver.subscribe(this.onCommentEvent, this.onCommentError);
+        this.commentSubscriber = commentService.eventObserver.subscribe(this.onCommentEvent, this.onCommentError);
     }
 
     componentWillUnmount(){
-        commentService.eventObserver.unsubscribe();
+        this.commentSubscriber.unsubscribe();
     }
 
     static navigationOptions = props => ({

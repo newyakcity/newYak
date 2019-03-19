@@ -20,12 +20,19 @@ export class PostListContainer extends Component {
           posts: []
         }
 
-        postService.collectionObserver
+        this.postSubscriber = postService.collectionObserver
           .subscribe(posts => this.toggleLoad(this.state.refreshing, false, {posts}));
     }
 
+    componentDidMount() {
+      this.getPosts();
+
+      this._focusListener = this.props.navigation.addListener('willFocus', this.getPosts);
+    }
+
     componentWillUnmount() {
-      postService.collectionObserver.unsubscribe();
+      this.postSubscriber.unsubscribe();
+      this._focusListener.remove();
     }
 
     static navigationOptions = props => ({
@@ -52,16 +59,6 @@ export class PostListContainer extends Component {
 
         alert('Unable to retrieve posts. Please try again.');
       }
-    }
-
-    componentDidMount() {
-        this.getPosts();
-
-        this._focusListener = this.props.navigation.addListener('willFocus', this.getPosts);
-    }
-
-    componentWillUnmount() {
-      this._focusListener.remove();
     }
 
     navigate = post => this.props.navigation.navigate('Post', {post});
