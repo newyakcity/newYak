@@ -3,14 +3,22 @@ import {service} from './service';
 import {Subject} from "rxjs/Subject";
 
 export const commentService = {
+    eventTypes = {
+        addCommentComplete: 'addCommentComplete'
+    },
+
     collectionObserver: new Subject(),
+    eventObserver: new Subject(),
 
     addComment: async (postId, body) => {
-        const json = {postId, body}
+        const json = {postId, body};
 
         const res = await service._postJson(commentUrl, json);
 
-        return res;
+        eventObserver.next({
+            type: commentService.eventTypes.addCommentComplete,
+            comment: res
+        });
     },
 
     getPostComments: async id => {

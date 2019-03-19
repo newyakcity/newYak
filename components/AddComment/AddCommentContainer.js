@@ -20,6 +20,22 @@ export class AddCommentContainer extends Component {
         }
 
         this.props.navigation.setParams({saveButton: this.getSaveButton()})
+
+        commentService.eventObserver.subscribe(
+            event => {
+                if(event.type === commentService.eventTypes.addCommentComplete)
+                    this.onCommentSave(event.comment)
+            },
+            error => {
+                console.log(error);
+                this.setState({loading: false});
+                alert('Unable to save your comment. Please try again.');
+            }
+        );
+    }
+
+    componentWillUnmount(){
+        commentService.eventObserver.unsubscribe();
     }
 
     static navigationOptions = props => ({
@@ -27,25 +43,20 @@ export class AddCommentContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
+    onCommentSave(comment){
+        this.setState({loading: false});
+
+        comment && this.props.navigation.goBack();
+    }
+
     getSaveButton = () => (<NavButton onClick={this.addComment} icon='paper-plane'/>)
 
-    addComment = async () => {
-        let res;
-
+    addComment = () => {
         this.setState({loading: true});
 
-        try{
-            const post = this.props.navigation.getParam('post');
+        const post = this.props.navigation.getParam('post');
 
-            res = await commentService.addComment(post.id, this.state.comment);
-        } catch(e) {
-            console.log(e);
-            alert('Unable to save your comment. Please try again.');
-        } finally {
-            this.setState({loading: false});
-
-            res && this.props.navigation.goBack();
-        }
+        commentService.addComment(post.id, this.state.comment);
     }
 
     onCommentChange = comment => this.setState({comment})

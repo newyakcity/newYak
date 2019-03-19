@@ -44,7 +44,7 @@ export class PostContainer extends Component {
     }
   }
 
-  getPostComments = async (refresh) => {
+  getPostComments = refresh => {
     try {
       this.toggleLoad(refresh, true);
 
