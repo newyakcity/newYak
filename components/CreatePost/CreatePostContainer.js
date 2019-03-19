@@ -5,7 +5,7 @@ import {SafeAreaView} from 'react-native';
 import {CreatePost} from './CreatePost';
 import Loading from '../common/Loading';
 
-import {locationService, postService} from '../../services';
+import {postService} from '../../services';
 
 import defaultStyles from '../../styles';
 import { defaultNavigationOptions } from '../../constants';
@@ -54,12 +54,10 @@ export class CreatePostContainer extends Component {
         this.props.navigation.navigate('Post', {post});
     }
 
-    savePost = async () => {
+    savePost = () => {
         this.setState({loading: true});
 
-        const locationData = await locationService.getLocation();
-
-        postService.createPost({...this.state}, locationData.coords);
+        postService.createPost({...this.state});
     }
 
     render() {

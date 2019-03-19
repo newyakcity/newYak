@@ -2,6 +2,8 @@ import moment from 'moment';
 import {Subject} from 'rxjs/Subject';
 
 import {service} from './service';
+import {locationService} from './locationService';
+
 import {MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
 
 export const postService = {
@@ -29,8 +31,10 @@ export const postService = {
         return `${postBody.slice(0, MAX_POST_LENGTH)}...`;
     },
 
-    createPost: async (post, coords) => {
-        const json = {...post, ...coords}
+    createPost: async (post) => {
+        const locationData = await locationService.getLocation();
+
+        const json = {...post, ...locationData.coords}
 
         const res = await service._postJson(postUrl, json);
 
@@ -46,8 +50,10 @@ export const postService = {
         postService.postObserver.next(res);
     },
 
-    search: async (lat, lng) => {
-        const res = await service._getJson(searchUrl(lat,lng));
+    search: async () => {
+        const {coords: {latitude, longitude}} = await locationService.getLocation();
+
+        const res = await service._getJson(searchUrl(latitude,longitude));
         
         postService.collectionObserver.next(res);
     }

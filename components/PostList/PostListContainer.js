@@ -42,15 +42,11 @@ export class PostListContainer extends Component {
       }
     }
 
-    getPosts = async refresh => {
+    getPosts = refresh => {
       try{
         this.toggleLoad(refresh, true);
-
-        const locationData = await locationService.getLocation();
         
-        const {latitude, longitude} = locationData.coords;
-        
-        postService.search(latitude, longitude);
+        postService.search();
       } catch(e) {
         this.toggleLoad(refresh, false);
 
