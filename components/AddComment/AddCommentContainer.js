@@ -21,17 +21,7 @@ export class AddCommentContainer extends Component {
 
         this.props.navigation.setParams({saveButton: this.getSaveButton()})
 
-        commentService.eventObserver.subscribe(
-            event => {
-                if(event.type === commentService.eventTypes.addCommentComplete)
-                    this.onCommentSave(event.comment)
-            },
-            error => {
-                console.log(error);
-                this.setState({loading: false});
-                alert('Unable to save your comment. Please try again.');
-            }
-        );
+        commentService.eventObserver.subscribe(this.onCommentEvent, this.onCommentError);
     }
 
     componentWillUnmount(){
@@ -43,10 +33,20 @@ export class AddCommentContainer extends Component {
         headerRight: props.navigation.getParam('saveButton')
     })
 
-    onCommentSave(comment){
+    onCommentEvent = event => {
+        if(event.type === commentService.eventTypes.addCommentComplete) {
+            this.setState({loading: false});
+
+            comment && this.props.navigation.goBack();
+        }
+    }
+
+    onCommentError = error => {
+        console.log(error);
+        
         this.setState({loading: false});
 
-        comment && this.props.navigation.goBack();
+        alert('Unable to save your comment. Please try again.')
     }
 
     getSaveButton = () => (<NavButton onClick={this.addComment} icon='paper-plane'/>)
