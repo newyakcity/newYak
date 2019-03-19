@@ -3,7 +3,7 @@ import {service} from './service';
 import {Subject} from "rxjs/Subject";
 
 export const commentService = {
-    eventTypes = {
+    eventTypes: {
         addCommentComplete: 1
     },
 
@@ -12,10 +12,10 @@ export const commentService = {
 
     addComment: async (postId, body) => {
         const json = {postId, body};
-
+    
         const res = await service._postJson(commentUrl, json);
-
-        eventObserver.next({
+    
+        commentService.eventObserver.next({
             type: commentService.eventTypes.addCommentComplete,
             comment: res
         });
@@ -23,7 +23,7 @@ export const commentService = {
 
     getPostComments: async id => {
         const comments = await service._getJson(postCommentsUrl(id))
-
+    
         commentService.collectionObserver.next(comments);
-    },
+    }
 }

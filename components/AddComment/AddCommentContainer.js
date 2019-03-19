@@ -37,13 +37,13 @@ export class AddCommentContainer extends Component {
         if(event.type === commentService.eventTypes.addCommentComplete) {
             this.setState({loading: false});
 
-            comment && this.props.navigation.goBack();
+            event.comment && this.props.navigation.goBack();
         }
     }
 
     onCommentError = error => {
         console.log(error);
-        
+
         this.setState({loading: false});
 
         alert('Unable to save your comment. Please try again.')

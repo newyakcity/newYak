@@ -11,7 +11,7 @@ export const postService = {
     eventObserver: new Subject(),
     postObserver: new Subject(),
 
-    eventTypes = {
+    eventTypes: {
         createPostComplete: 1
     },
 
@@ -38,7 +38,7 @@ export const postService = {
 
         const res = await service._postJson(postUrl, json);
 
-        eventObserver.next({
+        postService.eventObserver.next({
             type: postService.eventTypes.createPostComplete,
             post: res
         });
