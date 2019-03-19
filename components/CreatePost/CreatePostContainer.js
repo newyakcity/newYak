@@ -22,6 +22,18 @@ export class CreatePostContainer extends Component {
         }
 
         this.props.navigation.setParams({saveButton: this.getSaveButton()});
+
+        postService.eventObserver.subscribe(
+            event => {
+                if(event.type === postService.eventTypes.createPostComplete)
+                    this.navigateHome(event.post);
+            },
+            error => {
+                console.log(error);
+                this.setState({loading: false});
+                alert('Unable to save your post. Please try again.');
+            }
+        );
     }
 
     static navigationOptions = props => ({
@@ -43,27 +55,11 @@ export class CreatePostContainer extends Component {
     }
 
     savePost = async () => {
-        let post;
-
         this.setState({loading: true});
 
         const locationData = await locationService.getLocation();
 
-        postService.createPost({...this.state}, locationData.coords)
-            .subscribe(
-                data => {
-                    post = data;
-                },
-                error => {
-                    console.log(error);
-                    alert('Unable to save your post. Please try again.');
-                },
-                () => {
-                    this.setState({loading: false});
-    
-                    post && this.navigateHome(post);
-                }
-            );
+        postService.createPost({...this.state}, locationData.coords);
     }
 
     render() {

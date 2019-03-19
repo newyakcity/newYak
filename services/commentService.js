@@ -4,7 +4,7 @@ import {Subject} from "rxjs/Subject";
 
 export const commentService = {
     eventTypes = {
-        addCommentComplete: 'addCommentComplete'
+        addCommentComplete: 1
     },
 
     collectionObserver: new Subject(),

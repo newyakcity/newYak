@@ -1,5 +1,4 @@
 import moment from 'moment';
-import {from} from 'rxjs';
 import {Subject} from 'rxjs/Subject';
 
 import {service} from './service';
@@ -7,7 +6,13 @@ import {MAX_POST_LENGTH, searchUrl, postUrl} from "../constants";
 
 export const postService = {
     collectionObserver: new Subject(),
+    eventObserver: new Subject(),
     postObserver: new Subject(),
+
+    eventTypes = {
+        createPostComplete: 1
+    },
+
     // Helper methods 
     formatDate: date => {
         const diff = moment.duration(moment.utc().diff(moment.utc(date)));
@@ -24,15 +29,15 @@ export const postService = {
         return `${postBody.slice(0, MAX_POST_LENGTH)}...`;
     },
 
-    // API methods
-    createPost: (post, coords) => from(postService._createPost(post, coords)),
-
-    _createPost: async (post, coords) => {
+    createPost: async (post, coords) => {
         const json = {...post, ...coords}
 
         const res = await service._postJson(postUrl, json);
 
-        return res;
+        eventObserver.next({
+            type: postService.eventTypes.createPostComplete,
+            post: res
+        });
     },
 
     getPost: async id => {
